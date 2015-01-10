@@ -6,7 +6,7 @@
  */
 namespace Admin\Controller;
 
-use Admin\Model;
+// use Admin\Model;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
  *
  * @package Admin
  */
-class AdminController extends AbstractActionController
+class IndexController extends AbstractActionController
 {
     /**
      * Index - Admin
@@ -23,7 +23,6 @@ class AdminController extends AbstractActionController
      */
     public function indexAction()
     {
-       
     }
   
 }
