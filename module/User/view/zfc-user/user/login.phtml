@@ -1,0 +1,56 @@
+<?php
+    $form = $this->loginForm;
+    $form->prepare();
+    $redirect = empty($this->redirect) ? '?redirect=home' : '?redirect='.$this->redirect;
+    $form->setAttributes(array(
+                                'action' => $redirect,
+                                'method' => 'post',
+                                'class'  => 'form-signin'
+                                ));
+?>
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <div class="account-wall">
+            <div id="my-tab-content" class="tab-content">
+                <div class="tab-pane active" id="login">
+                    <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                         alt="">
+                    <?php echo $this->form()->openTag($form);?>
+                        <?php foreach ($form as $element) : ?>
+
+                            <?php
+                            if ('submit' != $element->getAttribute('type')) {
+                                switch($element->getLabel()){
+                                    case 'Email':
+                                        $element->setLabel('Введите eMail');
+                                        $element->setAttribute('placeholder', 'eMail');
+                                        break;
+                                    case 'Password':
+                                        $element->setLabel('Введите пароль');
+                                        $element->setAttribute('placeholder','пароль');
+                                        break;
+                                }
+                                $element->setAttribute('class', 'form-control');
+                                echo '<label>'.$element->getLabel().'</label>';
+                                echo $this->formElement($element);
+                            }
+                            if ($this->formElementErrors($element)) : ?>
+                                <?php
+                                echo $this->formElementErrors()
+                                    ->setMessageOpenFormat('<p class="help-block">')
+                                    ->setMessageSeparatorString('</p><p class="help-block">')
+                                    ->setMessageCloseString('</p>')
+                                    ->render($element);
+                                ?>
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                        <input type="submit" class="btn btn-lg btn-default btn-block" value="Войти" />
+                    <?php echo $this->form()->closeTag();?>
+                    <div id="tabs" data-tabs="tabs">
+                        <p class="text-center"><a href="#register" data-toggle="tab">Регистрация</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

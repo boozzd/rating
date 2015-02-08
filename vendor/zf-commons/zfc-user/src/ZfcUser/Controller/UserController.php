@@ -48,7 +48,7 @@ class UserController extends AbstractActionController
      * @todo Make this dynamic / translation-friendly
      * @var string
      */
-    protected $failedLoginMessage = 'Authentication failed. Please try again.';
+    protected $failedLoginMessage = 'Ошибка авторизации. Повторите попытку.';
 
     /**
      * @var UserControllerOptionsInterface

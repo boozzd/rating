@@ -1,0 +1,32 @@
+<?php if($send):?>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="account-wall">
+                    <div class="text-center">Вы успешно зарегистрировались.<br>
+                        <a href="<?php echo $this->url('home');?>">На главную</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php else:?>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="account-wall">
+                <div id="my-tab-content" class="tab-content">
+                    <h2 class="text-center">Регистрация</h2>
+                    <div class="tab-pane active" id="register">
+                        <?=$this->form()->openTag($form);?>
+                            <?=$this->formRow($form->get('email'))?>
+                            <?=$this->formRow($form->get('password'))?>
+                            <?=$this->formRow($form->get('password-confirm'))?>
+                            <?=$this->formRow($form->get('captcha'))?>
+                            <input type="submit" class="btn btn-lg btn-default btn-block registration-button" value="Регистрация" />
+                        <?=$this->form()->closeTag($form);?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif;?>

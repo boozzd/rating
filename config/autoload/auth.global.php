@@ -2,7 +2,7 @@
 return array(
 	'zfcuser' => array(
         // telling ZfcUser to use our own class
-        'user_entity_class'       => 'Admin\Entity\User',
+        'user_entity_class'       => 'User\Entity\User',
         // telling ZfcUserDoctrineORM to skip the entities it defines
         'enable_default_entities' => false,
     ),
@@ -17,14 +17,14 @@ return array(
             // using an object repository (entity repository) to load all roles into our ACL
             'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
                 'object_manager'    => 'doctrine.entitymanager.orm_default',
-                'role_entity_class' => 'Admin\Entity\Role',
+                'role_entity_class' => 'User\Entity\Role',
             ),
         ),
 
 
         'guards' => array(
            'BjyAuthorize\Guard\Route' => array(
-                array('route' => 'home', 'roles' => array('guest')),
+                array('route' => 'home', 'roles' => array('user')),
                 array('route' => 'zfcuser', 'roles' => array('user')),
                 array('route' => 'zfcuser/logout', 'roles' => array('user')),
                 array('route' => 'zfcuser/login', 'roles' => array('guest')),

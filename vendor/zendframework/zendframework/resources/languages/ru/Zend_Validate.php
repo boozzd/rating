@@ -77,6 +77,7 @@ return array(
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' не соответствует формату quoted-string",
     "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' недопустимое имя для адреса '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' превышает допустимую длину",
+    "'%hostname%' is not a valid hostname for the email address" => "'%hostname%' не является допустимым именем хоста для адреса '%value%'",
 
     // Zend_Validate_File_Count
     "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Слишком много файлов, максимально разрешено - '%max%', а получено - '%count%'",
@@ -249,4 +250,6 @@ return array(
     "Invalid type given, value should be a string" => "Недопустимый тип данных, значение должно быть строкой",
     "'%value%' is less than %min% characters long" => "'%value%' меньше разрешенной минимальной длины в %min% символов",
     "'%value%' is more than %max% characters long" => "'%value%' больше разрешенной максимальной длины в %max% символов",
+    "The input is less than %min% characters long" => "Значение имеет длину, меньше чем %min% символов",
+    "The input is more than %max% characters long" => "Значение имеет длину, больше чем %max% символов",
 );

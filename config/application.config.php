@@ -3,7 +3,7 @@ return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
-        // 'ZendDeveloperTools',
+        'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
         'ZfcBase',
@@ -11,7 +11,7 @@ return array(
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
 
-        'Admin'
+        'User'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

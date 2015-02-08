@@ -6,7 +6,7 @@
  * @license http://framework.zend.com/license/new-bsd New BSD License
  */
  
-namespace Admin\Entity;
+namespace User\Entity;
 
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -51,6 +51,24 @@ class User implements UserInterface, ProviderInterface
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    protected $lastname;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    protected $firstname;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    protected $secondname;
+
+    /**
+     * @var string
      * @ORM\Column(type="string", length=128)
      */
     protected $password;
@@ -62,13 +80,27 @@ class User implements UserInterface, ProviderInterface
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     * @ORM\ManyToMany(targetEntity="Admin\Entity\Role")
+     * @ORM\ManyToMany(targetEntity="User\Entity\Role")
      * @ORM\JoinTable(name="user_role_linker",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      * )
      */
     protected $roles;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ucode", type="string", length=128, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $ucode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="upcode", type="string", length=128, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $upcode;
 
     /**
      * Initialies the roles variable.
@@ -230,5 +262,132 @@ class User implements UserInterface, ProviderInterface
     public function addRole($role)
     {
         $this->roles[] = $role;
+    }
+
+    /**
+     * Set roles.
+     *
+     * @param Roles array
+     *
+     * @return void
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
+    /**
+     * Set ucode
+     *
+     * @param string $ucode
+     * @return User
+     */
+    public function setUcode($ucode)
+    {
+        $this->ucode = $ucode;
+
+        return $this;
+    }
+
+    /**
+     * Get ucode
+     *
+     * @return string
+     */
+    public function getUcode()
+    {
+        return $this->ucode;
+    }
+
+    /**
+     * Set upcode
+     *
+     * @param string $upcode
+     * @return User
+     */
+    public function setUpcode($upcode)
+    {
+        $this->upcode = $upcode;
+
+        return $this;
+    }
+
+    /**
+     * Get upcode
+     *
+     * @return string
+     */
+    public function getUpcode()
+    {
+        return $this->upcode;
+    }
+
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     * @return User
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * Get lastname
+     *
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     * @return User
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Get firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set secondname
+     *
+     * @param string $secondname
+     * @return User
+     */
+    public function setSecondname($secondname)
+    {
+        $this->secondname = $secondname;
+
+        return $this;
+    }
+
+    /**
+     * Get secondname
+     *
+     * @return string
+     */
+    public function getSecondname()
+    {
+        return $this->secondname;
     }
 }

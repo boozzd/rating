@@ -14,8 +14,26 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    private $em;
+
     public function indexAction()
     {
-        return new ViewModel();
+        $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer')->headTitle('Личная страница');
+        $em = $this->getEntityManager();
+
+        $id = $this->zfcUserAuthentication()->getIdentity()->getId();
+        $user = $em->find('User\Entity\User', $id);
+
+        return new ViewModel(array(
+            'user' => $user,
+        ));
+    }
+
+    public function getEntityManager()
+    {
+        if (null === $this->em) {
+            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+        return $this->em;
     }
 }
