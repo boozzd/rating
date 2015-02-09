@@ -1,0 +1,64 @@
+<?php echo $this->form()->openTag($form); ?>
+<div class="row">
+    <ol class="breadcrumb col-md-6">
+        <li><a href="<?=$this->url('admin-user')?>">Управление пользователями</a></li>
+        <li><?=$this->user->getEmail();?></li>
+    </ol>
+    <div class="col-md-6">
+        <div class="btn-group btn-group-justified">
+            <a href="<?=$this->url('admin-user')?>" class="btn btn-warning"> <span class="glyphicon glyphicon-arrow-left"></span> Отмена</a>
+
+            <a href="javascript:void(0)" class="btn btn-default" onclick="$('#user').submit();"> <span class="glyphicon glyphicon-ok"></span> Сохранить</a>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('email'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('email'));?>
+        </div>
+
+    </div>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('roles'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('roles'))?>
+        </div>
+    </div>
+    <hr/>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('password'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('password'))?>
+        </div>
+    </div>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('password-confirm'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('password-confirm'))?>
+        </div>
+    </div>
+    <hr/>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('lastname'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('lastname'));?>
+        </div>
+    </div>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('firstname'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('firstname'));?>
+        </div>
+    </div>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('secondname'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('secondname'));?>
+        </div>
+    </div>
+
+</div>
+
+<?php echo $this->form()->closeTag() ?>

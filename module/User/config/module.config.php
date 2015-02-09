@@ -50,11 +50,29 @@ return array(
                     ),
                 ),
             ),
+            'admin-user' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/admin-users[/:action[/:id]][/:page[/:role]]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                        'page'     => '[0-9]+',
+                        'role'  => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'User\Controller\Admin',
+                        'action'     => 'index',
+                        'page'=>1
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(
         'template_map' => array(
             'layout/authenticate'           => __DIR__ . '/../view/layout/authenticate.phtml',
+            'user-paginator-slide' => __DIR__ . '/../view/user/admin/slidePaginator.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -62,7 +80,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'User\Controller\Index' => 'User\Controller\IndexController'
+            'User\Controller\Index' => 'User\Controller\IndexController',
+            'User\Controller\Admin' => 'User\Controller\AdminController',
         ),
     ),
 
@@ -72,6 +91,7 @@ return array(
                 array('route' => 'user', 'roles' => array( 'user')),
                 array('route' => 'zfcuser-login', 'roles' => array( 'guest')),
                 array('route' => 'registration', 'roles' => array('guest')),
+                array('route' => 'admin-user', 'roles' => array('admin')),
             ),
         ),
     ),

@@ -1,0 +1,23 @@
+<?php if ($this->pageCount > 1): ?>
+    <ul class="pagination pull-left" style="margin: 0;">
+        <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+            <a href="<?php echo $this->url('admin-user', array('page' => $this->first, )+$plus); ?>">&laquo;</a></li>
+        <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
+            <a href="<?php echo $this->url('admin-user', array('page' => $this->previous,)+$plus); ?>">&lsaquo;</a></li>
+
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <li <?php echo $page == $this->current ? 'class="active"' : ''; ?>><a href="<?php echo $this->url('admin-user', array('page' => $page,)+$plus); ?>">
+                    <?php echo $page; ?>
+                </a></li>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+            <a href="<?php echo $this->url('admin-user', array('page' => $this->next, )+$plus); ?>">&rsaquo;</a></li>
+        <!-- Last page link -->
+        <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
+            <a href="<?php echo $this->url('admin-user', array( 'page' => $this->last,)+$plus); ?>">&raquo;</a></li>
+    </ul>
+    <div class="clearfix"></div>
+<?php endif; ?>

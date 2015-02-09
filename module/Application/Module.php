@@ -19,6 +19,16 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+
+        $auth = $serviceManager->get('zfcuser_auth_service');
+        $roles = array();
+        if($auth->hasIdentity()){
+            $roles = array_map(function($r){return $r->getRoleId();},$auth->getIdentity()->getRoles());
+        }
+        $viewModel->roles = $roles;
     }
 
     public function getConfig()

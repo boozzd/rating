@@ -8,7 +8,7 @@ class UserEditForm extends Form{
     public function __construct($em)
     {
 
-        parent::__construct('edit');
+        parent::__construct('user');
 
         $this->setLabelAttributes(array(
             'method' => 'post',
@@ -21,13 +21,13 @@ class UserEditForm extends Form{
             'attributes' => array(
                 'type' => 'text',
                 'placeholder' => 'Иванов',
-                'id' => 'key',
+                'id' => 'lastname',
                 'class' => 'form-control',
             ),
             'options' => array(
                 'label' => 'Фамилия:',
                 'label_attributes' => array(
-                    'class' => ''
+                    'class' => 'col-sm-2 control-label'
                 ),
             ),
         ));
@@ -37,13 +37,13 @@ class UserEditForm extends Form{
             'attributes' => array(
                 'type' => 'text',
                 'placeholder' => 'Иван',
-                'id' => 'key',
+                'id' => 'firstname',
                 'class' => 'form-control',
             ),
             'options' => array(
                 'label' => 'Имя:',
                 'label_attributes' => array(
-                    'class' => ''
+                    'class' => 'col-sm-2 control-label'
                 ),
             ),
         ));
@@ -53,15 +53,16 @@ class UserEditForm extends Form{
             'attributes' => array(
                 'type' => 'text',
                 'placeholder' => 'Иванов',
-                'id' => 'key',
+                'id' => 'secondname',
                 'class' => 'form-control',
             ),
             'options' => array(
                 'label' => 'Отчество:',
                 'label_attributes' => array(
-                    'class' => ''
+                    'class' => 'col-sm-2 control-label'
                 ),
             ),
         ));
+
     }
 }

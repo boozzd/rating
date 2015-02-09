@@ -4,7 +4,7 @@ return array(
 
         'driver' => array(
             // overriding zfc-user-doctrine-orm's config
-            'zfcuser_entity' => array(
+            'admin_entity' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
                 'paths' => array(__DIR__ . '/../src/Admin/Entity'),
@@ -12,7 +12,7 @@ return array(
 
             'orm_default' => array(
                 'drivers' => array(
-                    'Admin\Entity' => 'zfcuser_entity',
+                    'Admin\Entity' => 'admin_entity',
                 ),
             ),
         ),
@@ -30,6 +30,23 @@ return array(
                     ),
                 ),
             ),
+            'column-data' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/admin-column[/:action[/:type[/:id][/:page]]]',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Columndata',
+                        'action' => 'index',
+                        'type' => 'rate'
+                    ),
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                        'page'     => '[0-9]+',
+                        'type' => '[a-zA-Z][a-zA-Z_-]*',
+                    ),
+                ),
+            ),
         ),
     ),
     'view_manager' => array(
@@ -42,7 +59,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Admin\Controller\Index' => 'Admin\Controller\IndexController'
+            'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            'Admin\Controller\Columndata' => 'Admin\Controller\ColumndataController'
         ),
     ),
 
@@ -50,6 +68,7 @@ return array(
         'guards' => array(
            'BjyAuthorize\Guard\Route' => array(
                 array('route' => 'admin', 'roles' => array( 'admin')),
+                array('route' => 'column-data', 'roles' => array('admin'))
             ),
         ),
     ),

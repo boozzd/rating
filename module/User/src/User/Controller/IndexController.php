@@ -48,11 +48,9 @@ class IndexController extends AbstractActionController
         $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer')->headTitle('Регистрация');
         $em = $this->getEntityManager();
 
-        $id = $this->zfcUserAuthentication()->getIdentity()->getId();
-
         $form = new \User\Form\RegistrationForm($em);
 
-        $user = new \User\Entity\User($id);
+        $user = new \User\Entity\User();
 
         $request = $this->getRequest();
         $send = false;
@@ -113,7 +111,14 @@ class IndexController extends AbstractActionController
             if($form->isValid()){
                 $em->persist($user);
                 $em->flush();
+
+                return $this->redirect()
+                    ->toUrl($this->url()->fromRoute('user', array('action' => 'edit')) . '#save-success');
+            }else{
+                return $this->redirect()
+                    ->toUrl($this->url()->fromRoute('user', array('action' => 'edit')) . '#remove-success');
             }
+
         }
 
         return new ViewModel(array(

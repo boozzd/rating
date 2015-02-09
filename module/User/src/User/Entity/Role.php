@@ -42,6 +42,13 @@ class Role implements HierarchicalRoleInterface
     protected $parent;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $name;
+
+    /**
      * Get the id.
      *
      * @return int
@@ -98,12 +105,35 @@ class Role implements HierarchicalRoleInterface
     /**
      * Set the parent role.
      *
-     * @param Role $role
+     * @param Role role
      *
      * @return void
      */
     public function setParent(Role $parent)
     {
         $this->parent = $parent;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Role
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

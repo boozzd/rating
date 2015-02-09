@@ -1,16 +1,68 @@
 <?php
 namespace User\Form;
 
-use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
-use DoctrineModule\Validator\NoObjectExists;
+
+class AdminUserEditFilter extends InputFilter{
+
+    public function __construct($sm){
 
 
 
-class RegistrationFilter extends InputFilter
-{
-    public function __construct($sm)
-    {
+        $this->add(array(
+            'name' => 'lastname',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'max' => 100,
+                    ),
+                ),
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'firstname',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'max' => 100,
+                    ),
+                ),
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'secondname',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'max' => 100,
+                    ),
+                ),
+            ),
+        ));
+
         $this->add(array(
             'name'     => 'email',
             'required' => true,
@@ -23,20 +75,9 @@ class RegistrationFilter extends InputFilter
                     'name'    => 'StringLength',
                     'options' => array(
                         'encoding' => 'UTF-8',
-                        'min'      => 1,
+                        'min'      => 3,
                         'max'      => 100,
                     ),
-                ),
-                array(
-                    'name' => '\DoctrineModule\Validator\NoObjectExists',
-                    'options' => array(
-                        'object_repository' => $sm->get('doctrine.entitymanager.orm_default')->getRepository('User\Entity\User'),
-                        'fields' => array('email'),
-                        'messages' => array(
-                            'objectFound' => 'Пользователь с таким e-mail уже зарегистрирован.',
-                        ),
-                    ),
-
                 ),
                 array(
                     'name' => 'EmailAddress',
@@ -46,7 +87,7 @@ class RegistrationFilter extends InputFilter
 
         $this->add(array(
             'name' => 'password',
-            'required' => true,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StripTags'),
                 array('name'=> 'StringTrim'),
@@ -56,7 +97,7 @@ class RegistrationFilter extends InputFilter
                     'name' => 'StringLength',
                     'options' => array(
                         'encoding' => 'UTF-8',
-                        'min' => 4,
+                        'min' => 6,
                         'max' => 100,
                     )
                 ),
@@ -65,7 +106,7 @@ class RegistrationFilter extends InputFilter
 
         $this->add(array(
             'name' => 'password-confirm',
-            'required' => true,
+            'required' => false,
             'filters' => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
@@ -75,7 +116,7 @@ class RegistrationFilter extends InputFilter
                     'name' => 'StringLength',
                     'options' => array(
                         'encoding' => 'UTF-8',
-                        'min' => 4,
+                        'min' => 6,
                         'max' => 100,
                     ),
                 ),
@@ -91,6 +132,5 @@ class RegistrationFilter extends InputFilter
                 ),
             )
         ));
-
     }
 }

@@ -39,7 +39,7 @@ class RegistrationForm extends Form{
             ),
             'options' => array(
                 'label' => 'Пароль',
-                'label_attributes' => array('class' => 'f')
+                'label_attributes' => array('class' => '')
             )
         ));
 
@@ -69,7 +69,7 @@ class RegistrationForm extends Form{
                     'imgDir' => './public/img/captcha',
                     'ImgUrl' => '/img/captcha',
                     'width' => 300,
-                    'height' => 60,
+                    'height' => 75,
                     'wordlen' => 5,
                     'dotNoiseLevel' => 30,
                     'lineNoiseLevel' => 3,

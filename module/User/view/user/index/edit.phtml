@@ -1,18 +1,32 @@
-<h3 class="text-center">
-    Редактирования профилия
-</h3>
-<?php echo $this->form()->openTag($form);?>
-    <div class="form-group">
-        <?php echo $this->form()->openTag($form);?>
+<div class="page-header">
+    <h3 class="text-center">Редактирования профилия</h3>
+</div>
+
+
+<?php echo $this->form()->openTag($form); ?>
+<div class="col-md-offset-2">
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('lastname'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('lastname'));?>
+        </div>
+
     </div>
-    <div class="form-group">
-        <?php echo $this->formRow($form->get('lastname'));?>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('firstname'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('firstname'))?>
+        </div>
     </div>
-    <div class="form-group">
-        <?php echo $this->formRow($form->get('firstname'));?>
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('secondname'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('secondname'))?>
+        </div>
     </div>
-    <div class="form-group">
-        <?php echo $this->formRow($form->get('secondname'));?>
+    <div class="form-group col-md-offset-4">
+        <button class="btn btn-default" type="submit">Сохранить</button>
     </div>
-    <button type="submit" class="btn btn-default">Сохранить</button>
-<?php echo $this->form()->closeTag();?>
+</div>
+
+<?php echo $this->form()->closeTag() ?>

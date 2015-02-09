@@ -16,7 +16,7 @@ use ZfcUser\Entity\UserInterface;
 /**
  * An example of how to implement a role aware user entity.
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="User\Repository\UserRepository")
  * @ORM\Table(name="users")
  *
  * @author Tom Oram <tom@scl.co.uk>
@@ -101,6 +101,18 @@ class User implements UserInterface, ProviderInterface
      * @ORM\Column(name="upcode", type="string", length=128, precision=0, scale=0, nullable=false, unique=false)
      */
     private $upcode;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive = 1;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="is_delete", type="boolean")
+     */
+    private $isDelete = 0;
 
     /**
      * Initialies the roles variable.
@@ -389,5 +401,51 @@ class User implements UserInterface, ProviderInterface
     public function getSecondname()
     {
         return $this->secondname;
+    }
+
+    /**
+     * Set isDelete
+     *
+     * @param boolean $isDelete
+     * @return User
+     */
+    public function setIsDelete($isDelete)
+    {
+        $this->isDelete = $isDelete;
+
+        return $this;
+    }
+
+    /**
+     * Get isDelete
+     *
+     * @return boolean
+     */
+    public function getIsDelete()
+    {
+        return $this->isDelete;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }
