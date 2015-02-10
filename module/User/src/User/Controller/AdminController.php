@@ -30,7 +30,7 @@ class AdminController extends AbstractActionController
 
         $this->getServiceLocator()->get(
             'Zend\View\Renderer\PhpRenderer')
-            ->headTitle('Пользователи');
+            ->headTitle('Управление пользователями');
 
         $this->getServiceLocator()->get('viewhelpermanager')
             ->get('headScript')
@@ -43,9 +43,10 @@ class AdminController extends AbstractActionController
     /**
      * Admin - user index
      *
-     * @return Zend\View\Model\ViewModel Zend View Model
+     * @return \Zend\View\Model\ViewModel Zend View Model
      */
     public function indexAction(){
+        $this->layout()->setVariable('menu_select_sub', 'admin-users');
         $page = $this->params('page',1);
         $role = $this->params('role',null);
         $em = $this->getEntityManager();
@@ -82,15 +83,15 @@ class AdminController extends AbstractActionController
     /**
      * Admin - user edit
      *
-     * @return Zend\View\Model\ViewModel Zend View Model
+     * @return \Zend\View\Model\ViewModel Zend View Model
      *
      */
 
 
     public function editAction()
     {
+        $this->layout()->setVariable('menu_select_sub', 'admin-users');
         $id = $this->params('id');
-
         $em = $this->getEntityManager();
         $form = new \User\Form\AdminUserEditForm($em);
         if($id!=0){
@@ -133,8 +134,6 @@ class AdminController extends AbstractActionController
             }
         }
 
-
-
         return new ViewModel(array(
             'user'=>$user,
             'form'=>$form
@@ -143,7 +142,7 @@ class AdminController extends AbstractActionController
 
     /**
      * Admin - user show
-     * @return Zend\View\Model\JsonModel
+     * @return \Zend\View\Model\JsonModel
      */
     public function usershowAction(){
         $id = $this->params()->fromPost('id',null);
@@ -164,7 +163,7 @@ class AdminController extends AbstractActionController
 
     /**
      * Admin - user delete
-     * @return Zend\View\Model\JsonModel
+     * @return \Zend\View\Model\JsonModel
      */
     public function userdeleteAction()
     {

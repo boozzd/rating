@@ -1,0 +1,26 @@
+<?php echo $this->form()->openTag($form); ?>
+<div class="row">
+    <ol class="breadcrumb col-md-6">
+        <li><a href="<?=$this->url('column-data', array('type'=>$type))?>">Управление данными</a></li>
+        <li>Редактирование</li>
+    </ol>
+    <div class="col-md-6">
+        <div class="btn-group btn-group-justified">
+            <a href="<?=$this->url('admin-user')?>" class="btn btn-warning"> <span class="glyphicon glyphicon-arrow-left"></span> Отмена</a>
+
+            <a href="javascript:void(0)" class="btn btn-default" onclick="$('#base').submit();"> <span class="glyphicon glyphicon-ok"></span> Сохранить</a>
+        </div>
+    </div>
+</div>
+<div>
+
+    <div class="form-group clearfix">
+        <?=$this->formLabel($form->get('name'));?>
+        <div class="col-md-6">
+            <?=$this->formElement($form->get('name'));?>
+        </div>
+    </div>
+
+</div>
+
+<?php echo $this->form()->closeTag() ?>

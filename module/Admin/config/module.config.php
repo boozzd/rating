@@ -30,18 +30,33 @@ return array(
                     ),
                 ),
             ),
-            'column-data' => array(
+            'column-data-edit' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/admin-column[/:action[/:type[/:id][/:page]]]',
+                    'route' => '/admin-column/:action[/type-:type[/:id]]',
                     'defaults' => array(
                         'controller' => 'Admin\Controller\Columndata',
                         'action' => 'index',
-                        'type' => 'rate'
+                        'type' => 'rate',
+                        'id' => 0,
                     ),
                     'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
+                        'type' => '[a-zA-Z][a-zA-Z_-]*',
+                    ),
+                ),
+            ),
+            'column-data' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/admin-column[/type-:type[/:page]]',
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Columndata',
+                        'action' => 'index',
+                        'type' => 'rate',
+                        'page' => 1,
+                    ),
+                    'constraints' => array(
                         'page'     => '[0-9]+',
                         'type' => '[a-zA-Z][a-zA-Z_-]*',
                     ),
@@ -51,7 +66,7 @@ return array(
     ),
     'view_manager' => array(
         'template_map' => array(
-            'admin/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'columndata-paginator-slide' => __DIR__ . '/../view/admin/columndata/slidePaginator.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -68,7 +83,8 @@ return array(
         'guards' => array(
            'BjyAuthorize\Guard\Route' => array(
                 array('route' => 'admin', 'roles' => array( 'admin')),
-                array('route' => 'column-data', 'roles' => array('admin'))
+                array('route' => 'column-data', 'roles' => array('admin')),
+                array('route' => 'column-data-edit', 'roles' => array('admin'))
             ),
         ),
     ),

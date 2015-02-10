@@ -89,7 +89,8 @@ class IndexController extends AbstractActionController
 
     public function editAction()
     {
-        $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer')->headTitle('Изменение данных');
+        $this->layout()->setVariable('menu_select_sub', 'edit-me');
+        $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer')->headTitle('Изменение личных данных');
         $em = $this->getEntityManager();
 
         $form = new \User\Form\UserEditForm($em);

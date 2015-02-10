@@ -44,7 +44,7 @@ class Columndata
      *
      * @ORM\Column(name="is_active", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $isActive;
+    private $isActive = 1;
 
 
     /**
@@ -127,5 +127,29 @@ class Columndata
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Get type name
+     *
+     * @return string
+     */
+    public function getTypeName(){
+        $name = '';
+        switch($this->type){
+            case 'rate':
+                $name = 'ставка';
+                break;
+            case 'position':
+                $name = 'должность';
+                break;
+            case 'rank':
+                $name = 'ученое звание';
+                break;
+            case 'degree':
+                $name = 'научная степень';
+                break;
+        }
+        return $name;
     }
 }
