@@ -93,18 +93,19 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('menu_select_sub', 'admin-users');
         $id = $this->params('id');
         $em = $this->getEntityManager();
-        $form = new \User\Form\AdminUserEditForm($em);
+
         if($id!=0){
             $user = $em->find('User\Entity\User', $id);
-
         }else $user = new \User\Entity\User();
-
+        $form = new \User\Form\AdminUserEditForm($em, $user->getInstitute());
         $form->setData(array(
             'email'=>$user->getEmail(),
             'roles'=>array_map(function($r){ return $r->getId(); }, $user->getRoles()),
             'lastname'=>$user->getLastname(),
             'firstname'=>$user->getFirstname(),
             'secondname'=>$user->getSecondname(),
+            'institute' => $user->getInstitute(),
+            'chair' => $user->getChair(),
         ));
 
         $request = $this->getRequest();
@@ -112,7 +113,9 @@ class AdminController extends AbstractActionController
             $data = $request->getPost();
             $form->setData($data);
             $form->setInputFilter(new \User\Form\AdminUserEditFilter($this->getServiceLocator()));
+
             if ($form->isValid()) {
+
                 $user->setEmail($data['email']);
                 $user->setLastname($data['lastname']);
                 $user->setFirstname($data['firstname']);
@@ -122,10 +125,16 @@ class AdminController extends AbstractActionController
                     $roles[] = $em->find('User\Entity\Role', $value);
                 }
                 $user->setRoles($roles);
+
                 $bcrypt = new Bcrypt();
                 $bcrypt->setCost(14);
                 if (isset($data['password']) && $data['password'] != "")
                     $user->setPassword($bcrypt->create($data['password']));
+
+                $unit_id = $data['chair'] ? $data['chair'] : $data['institute'];
+                $unit = $em->find('Unit\Entity\Unit', $unit_id);
+                $user->setUnit($unit);
+
                 $em->persist($user);
                 $em->flush();
 
@@ -189,7 +198,5 @@ class AdminController extends AbstractActionController
         }
         return $this->em;
     }
-
-
 
 }

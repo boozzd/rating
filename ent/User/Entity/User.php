@@ -445,4 +445,37 @@ class User
     {
         return $this->role;
     }
+    /**
+     * @var \Unit\Entity\Unit
+     *
+     * @ORM\ManyToOne(targetEntity="Unit\Entity\Unit", inversedBy="features")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="unit_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $unit;
+
+
+    /**
+     * Set unit
+     *
+     * @param \Unit\Entity\Unit $unit
+     * @return User
+     */
+    public function setUnit(\Unit\Entity\Unit $unit = null)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return \Unit\Entity\Unit 
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
 }

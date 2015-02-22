@@ -93,13 +93,17 @@ class IndexController extends AbstractActionController
         $this->getServiceLocator()->get('Zend\View\Renderer\PhpRenderer')->headTitle('Изменение личных данных');
         $em = $this->getEntityManager();
 
-        $form = new \User\Form\UserEditForm($em);
         $id = $this->zfcUserAuthentication()->getIdentity()->getId();
 
         $user = $em->find('User\Entity\User', $id);
 
+        $form = new \User\Form\UserEditForm($em, $user->getInstitute());
         $form->setHydrator(new DoctrineEntity($em,'User\Entity\User'));
         $form->bind($user);
+        $form->setData(array(
+            'institute' => $user->getInstitute(),
+            'chair' => $user->getChair(),
+        ));
 
         $request = $this->getRequest();
 
@@ -109,7 +113,12 @@ class IndexController extends AbstractActionController
             $data = $request->getPost();
             $form->setData($data);
 
+            $unit_id = $data['chair'] ? $data['chair'] : $data['institute'];
+            $unit = $em->find('Unit\Entity\Unit', $unit_id);
+            $user->setUnit($unit);
+
             if($form->isValid()){
+
                 $em->persist($user);
                 $em->flush();
 

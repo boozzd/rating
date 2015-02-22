@@ -59,7 +59,7 @@
                             <a href="<?=$this->url('user', array('action'=>'edit'));?>">Мои данные</a>
                         </li>
                         <?php if(in_array('admin',$this->layout()->roles)):?>
-                        <li class="dropdown">
+                        <li class="dropdown <?php if(in_array($this->menu_select_sub, array('admin-users','admin-position','admin-rate','admin-rank','admin-degree', 'admin-unit'))) echo 'active';?>">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Администрирование <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li <?php if($this->menu_select_sub=='admin-users'):?> class="active"<?php endif; ?>>
@@ -70,12 +70,15 @@
                                 </li>
                                 <li <?php if($this->menu_select_sub=='admin-rate'):?> class="active"<?php endif; ?>>
                                     <a href="<?php echo $this->url('column-data', array('type'=> 'rate'));?>">Cтавка</a>
-                                </li <?php if($this->menu_select_sub=='admin-rank'):?> class="active"<?php endif; ?>>
-                                <li rate>
+                                </li>
+                                <li <?php if($this->menu_select_sub=='admin-rank'):?> class="active"<?php endif; ?>>
                                     <a href="<?php echo $this->url('column-data', array('type'=> 'rank'));?>">Ученое звание</a>
                                 </li>
                                 <li <?php if($this->menu_select_sub=='admin-degree'):?> class="active"<?php endif; ?>>
                                     <a href="<?php echo $this->url('column-data', array('type'=> 'degree'));?>">Научная степень</a>
+                                </li>
+                                <li <?php if($this->menu_select_sub=='admin-unit'):?> class="active"<?php endif; ?>>
+                                    <a href="<?php echo $this->url('admin-unit');?>">Институты и кафедры</a>
                                 </li>
                             </ul>
                         </li>

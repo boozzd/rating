@@ -115,6 +115,16 @@ class User implements UserInterface, ProviderInterface
     private $isDelete = 0;
 
     /**
+     * @var \Unit\Entity\Unit
+     *
+     * @ORM\ManyToOne(targetEntity="Unit\Entity\Unit", inversedBy="features")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="unit_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $unit;
+
+    /**
      * Initialies the roles variable.
      */
     public function __construct()
@@ -447,5 +457,55 @@ class User implements UserInterface, ProviderInterface
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param \Unit\Entity\Unit $unit
+     * @return User
+     */
+    public function setUnit(\Unit\Entity\Unit $unit = null)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return \Unit\Entity\Unit
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * Get institute
+     *
+     * @return \Unit\Entity\Unit id
+     */
+    public function getInstitute()
+    {
+        if($this->getUnit() && $this->getUnit()->getParent()){
+            return $this->getUnit()->getParent()->getId();
+        }elseif( $this->getUnit()){
+            return $this->getUnit()->getId();
+        }else{
+            return 0;
+        }
+    }
+
+    /**
+     * Get chair
+     *
+     * @return \Unit\Entity\Unit id
+     */
+    public function getChair()
+    {
+        $chair = $this->getUnit() && $this->getUnit()->getParent() ? $this->getUnit()->getId() : 0;
+        return $chair;
     }
 }

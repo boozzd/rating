@@ -1,0 +1,74 @@
+<div class="row">
+    <ol class="breadcrumb col-md-8">
+        <li class="active">Управление институтами и кафедрами</li>
+    </ol>
+    <div class="col-md-4">
+        <div class="btn-group btn-group-justified">
+            <a href="<?=$this->url('admin-unit-edit',array('action'=>'edit','id'=>0))?>" class="btn btn-default"> <span class="glyphicon glyphicon-plus"></span> Добавить</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 60px; text-align: center;">№</th>
+        <th>Название</th>
+        <th style="width: 170px; text-align: center;">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+        <?php function draw_unit($unit, $context, $prefix){ ?>
+            <tr class="<?php if(!$unit->getisActive())echo 'notActive';?>">
+                <td class="text-center">
+                    <?=$unit->getId()?>
+                </td>
+                <td>
+                    <a href="<?=$context->url('admin-unit-edit',array('action'=>'edit','id'=>$unit->getId()));?>">
+                        <?=$prefix.' '.$unit->getName();?>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="<?=$context->url('admin-unit-edit',array('action'=>'edit','id'=>$unit->getId()));?>" title="Редактировать">
+                        <span class="glyphicon glyphicon-edit"></span></a>
+                    <?php if($unit->getIsActive()):?>
+                        <a href="javascript:void(0)" onclick="showAction('<?=$context->url('admin-unit-edit', array('id'=>$unit->getId(),'action'=>'show'));?>', this)" title="Скрыть"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    <?php else:?>
+                        <a href="javascript:void(0)" onclick="showAction('<?=$context->url('admin-unit-edit', array('id'=>$unit->getId(),'action'=>'show'));?>', this)" title="Показать"><span class="glyphicon glyphicon-eye-close"></span></a>
+                    <?php endif;?>
+                </td>
+            </tr>
+        <?php };?>
+    <?php foreach ($this->units as $unit)
+        {
+            draw_unit($unit, $this, '');
+            $children = $unit->getChildren();
+            if($children){
+                foreach($children as $child){
+                    draw_unit($child, $this, '--');
+                }
+            }
+        }
+    ?>
+    </tbody>
+</table>
+<?=$this->paginationControl($this->units, 'Sliding', 'unit-paginator-slide', array());?>
+<script>
+    function showAction(url, elem){
+        var button = $(elem);
+        var trigger = button.closest('tr').hasClass('notActive');
+        $.post(url,{'act':trigger},function(res){
+            if(res.status === 'ok'){
+                if(trigger){
+                    button.closest('tr').removeClass('notActive');
+                    button.find('span').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open');
+
+                }else{
+                    button.closest('tr').addClass('notActive');
+                    button.find('span').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close');
+                }
+
+            }
+        },'JSON');
+    }
+</script>

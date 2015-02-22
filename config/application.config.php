@@ -12,7 +12,8 @@ return array(
         'BjyAuthorize',
 
         'User',
-        'Admin'
+        'Admin',
+        'Unit',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

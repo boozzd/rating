@@ -132,5 +132,15 @@ class AdminUserEditFilter extends InputFilter{
                 ),
             )
         ));
+
+        $this->add(array(
+            'name' => 'institute',
+            'required' => true,
+        ));
+
+        $this->add(array(
+            'name' => 'chair',
+            'required' => false,
+        ));
     }
 }
