@@ -88,7 +88,7 @@ return array(
            'BjyAuthorize\Guard\Route' => array(
                 array('route' => 'admin-unit', 'roles' => array( 'admin')),
                 array('route' => 'admin-unit-edit', 'roles' => array('admin')),
-                array('route' => 'unit', 'roles'=> array('admin')),
+                array('route' => 'unit', 'roles'=> array('user')),
             ),
         ),
     ),
