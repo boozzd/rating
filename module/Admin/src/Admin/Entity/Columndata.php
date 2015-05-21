@@ -32,6 +32,7 @@ class Columndata
     const TYPE_POSITION = "position";
     const TYPE_RANK = "rank";
     const TYPE_RATE = "rate";
+    const TYPE_YEAR = "year";
     /**
      * @var string
      *
@@ -88,7 +89,7 @@ class Columndata
      */
     public function setType($type)
     {
-        if (!in_array($type, array(self::TYPE_DEGREE, self::TYPE_POSITION, self::TYPE_RANK, self::TYPE_RATE))) {
+        if (!in_array($type, array(self::TYPE_DEGREE, self::TYPE_POSITION, self::TYPE_RANK, self::TYPE_RATE, self::TYPE_YEAR))) {
             throw new \InvalidArgumentException("Invalid type");
         }
         $this->type = $type;
@@ -149,6 +150,8 @@ class Columndata
             case 'degree':
                 $name = 'научная степень';
                 break;
+            case 'year':
+                $name = 'год';
         }
         return $name;
     }

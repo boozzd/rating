@@ -125,11 +125,17 @@ class User implements UserInterface, ProviderInterface
     private $unit;
 
     /**
+     * @ORM\OneToMany(targetEntity="Report\Entity\Reports", mappedBy="report")
+     **/
+    private $reports;
+
+    /**
      * Initialies the roles variable.
      */
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->reports = new ArrayCollection();
     }
 
     /**
@@ -507,5 +513,38 @@ class User implements UserInterface, ProviderInterface
     {
         $chair = $this->getUnit() && $this->getUnit()->getParent() ? $this->getUnit()->getId() : 0;
         return $chair;
+    }
+
+    /**
+     * Add reports
+     *
+     * @param \Report\Entity\Reports $reports
+     * @return User
+     */
+    public function addReports(\Report\Entity\Reports $reports)
+    {
+        $this->reports[] = $reports;
+
+        return $this;
+    }
+
+    /**
+     * Remove reports
+     *
+     * @param \Report\Entity\Reports $reports
+     */
+    public function removeReport(\Report\Entity\Reports $reports)
+    {
+        $this->reports->removeElement($reports);
+    }
+
+    /**
+     * Get reports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReports()
+    {
+        return $this->reports;
     }
 }

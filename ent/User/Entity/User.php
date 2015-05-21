@@ -478,4 +478,42 @@ class User
     {
         return $this->unit;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $reports;
+
+
+    /**
+     * Add reports
+     *
+     * @param \Report\Entity\Reports $reports
+     * @return User
+     */
+    public function addReport(\Report\Entity\Reports $reports)
+    {
+        $this->reports[] = $reports;
+
+        return $this;
+    }
+
+    /**
+     * Remove reports
+     *
+     * @param \Report\Entity\Reports $reports
+     */
+    public function removeReport(\Report\Entity\Reports $reports)
+    {
+        $this->reports->removeElement($reports);
+    }
+
+    /**
+     * Get reports
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReports()
+    {
+        return $this->reports;
+    }
 }

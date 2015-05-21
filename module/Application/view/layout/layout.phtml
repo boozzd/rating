@@ -77,6 +77,9 @@
                                 <li <?php if($this->menu_select_sub=='admin-degree'):?> class="active"<?php endif; ?>>
                                     <a href="<?php echo $this->url('column-data', array('type'=> 'degree'));?>">Научная степень</a>
                                 </li>
+                                <li <?php if($this->menu_select_sub=='admin-year'):?> class="active"<?php endif; ?>>
+                                    <a href="<?php echo $this->url('column-data', array('type' => 'year'));?>">Учебный год</a>
+                                </li>
                                 <li <?php if($this->menu_select_sub=='admin-unit'):?> class="active"<?php endif; ?>>
                                     <a href="<?php echo $this->url('admin-unit');?>">Институты и кафедры</a>
                                 </li>
